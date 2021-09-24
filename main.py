@@ -13,7 +13,7 @@ intents = discord.Intents.default()
 intents.members = True
 
 # NOTE: Bot object
-PREFIX = "dev."
+PREFIX = "sz."
 bot = commands.Bot(command_prefix=PREFIX, help_command=None, intents=intents)
 
 
@@ -21,12 +21,10 @@ bot = commands.Bot(command_prefix=PREFIX, help_command=None, intents=intents)
 @bot.event
 async def on_ready():
     # `Listening` activity
-    await bot.change_presence(
-        activity=discord.Activity(
-            type=discord.ActivityType.listening,
-            name=PREFIX,
-        )
-    )
+    await bot.change_presence(activity=discord.Activity(
+        type=discord.ActivityType.listening,
+        name=PREFIX,
+    ))
     print(f'Status#002 - {bot.user.name} is listening.', '\n')
 
 
@@ -34,10 +32,10 @@ async def on_ready():
 @bot.command(name="help")
 async def help(ctx: commands.Context):
     async with ctx.typing():
-        embed = discord.Embed(
-            title="Commands", description="Basic command patterns", color=0x45b865)
-        embed.set_author(
-            name="SZ Bot", icon_url="https://cdn.discordapp.com/avatars/799989827834478602/018456925efab272d09f8149c9ec8649.webp?size=1024")
+        embed = discord.Embed(title="Commands",
+                              description="Basic command patterns",
+                              color=0x45b865)
+        # embed.set_author(name="SZ Bot", icon_url="https://cdn.discordapp.com/avatars/799989827834478602/018456925efab272d09f8149c9ec8649.webp?size=1024")
         embed.add_field(name="Add", value="sz.add role+", inline=True)
         embed.add_field(name="Remove", value="sz.remove role+", inline=True)
         embed.set_footer(text="+ : One or multiple roles can be given")
@@ -53,8 +51,8 @@ async def add_roles(ctx: commands.Context, *roles: str.upper):
         async with ctx.typing():
             await message.add_reaction('🤔')
             response = '```fix\n❗️ course_name argument missing.```'
-            components.log_to_json(datetime.now(), ctx.author,
-                                   message.content, response)
+            components.log_to_json(datetime.now(), ctx.author, message.content,
+                                   response)
             return await ctx.reply(response)
 
     for role in roles:
@@ -80,8 +78,8 @@ async def remove_roles(ctx: commands.Context, *roles: str.upper):
         async with ctx.typing():
             await message.add_reaction('🤔')
             response = '```fix\n❗️ course_name argument missing.```'
-            components.log_to_json(datetime.now(), ctx.author,
-                                   message.content, response)
+            components.log_to_json(datetime.now(), ctx.author, message.content,
+                                   response)
             return await ctx.reply(response)
 
     for role in roles:
@@ -108,7 +106,8 @@ async def sort_roles(ctx: commands.Context):
         await ctx.message.add_reaction('🆗')
         return await ctx.reply(f"Roles are sorted!")
 
-    return await ctx.reply(f"You don't have the permission to use this command")
+    return await ctx.reply(f"You don't have the permission to use this command"
+                           )
 
 
 #
@@ -121,7 +120,8 @@ async def sort_channels(ctx: commands.Context):
         await ctx.message.add_reaction('🆗')
         return await ctx.reply(f"Channels are sorted!")
 
-    return await ctx.reply(f"You don't have the permission to use this command")
+    return await ctx.reply(f"You don't have the permission to use this command"
+                           )
 
 
 if __name__ == '__main__':
