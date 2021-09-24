@@ -62,7 +62,7 @@ async def add_roles(ctx: commands.Context, *roles: str.upper):
 
             else:
                 await message.add_reaction('😑')
-                response = '```fix\n❗️ Invalid course name```\n> Retry with a valid name. i.e.: CSE###, MAT###, PHY###'
+                response = '```fix\n❗️ Invalid course name {role}```\n> Retry with a valid name. i.e.: CSE###, MAT###, PHY###'
                 #
                 components.log_to_json(datetime.now(), ctx.author,
                                        message.content, response)
@@ -89,7 +89,7 @@ async def remove_roles(ctx: commands.Context, *roles: str.upper):
 
             else:
                 await message.add_reaction('😑')
-                response = '```fix\n❗️ Invalid course name```\n> Retry with a valid name. i.e.: CSE###, MAT###, PHY###'
+                response = '```fix\n❗️ Invalid course name {role}```\n> Retry with a valid name. i.e.: CSE###, MAT###, PHY###'
                 #
                 components.log_to_json(datetime.now(), ctx.author,
                                        message.content, response)

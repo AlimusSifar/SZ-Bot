@@ -53,6 +53,7 @@ def is_valid(role: str) -> bool:
     """
     VALID_COURSE_NAMES: "tuple[str]" = (
         "ANT",
+        "BUS",
         "CHE",
         "CSE",
         "ECO",

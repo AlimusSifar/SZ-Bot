@@ -1,0 +1,100 @@
+{
+    "log": [
+        {
+            "datetime": "2021-09-24 17:13:00.980720",
+            "user": "eXsage#8592",
+            "request": "sz.remove CHE101 CSE330 CSE421 CSE422",
+            "response": "`CHE101` course role has been removed from <@!526665368333189120>"
+        },
+        {
+            "datetime": "2021-09-24 17:13:01.666213",
+            "user": "eXsage#8592",
+            "request": "sz.remove CHE101 CSE330 CSE421 CSE422",
+            "response": "`CSE330` course role has been removed from <@!526665368333189120>"
+        },
+        {
+            "datetime": "2021-09-24 17:13:02.275280",
+            "user": "eXsage#8592",
+            "request": "sz.remove CHE101 CSE330 CSE421 CSE422",
+            "response": "You don't have `CSE421` course role.\nDon't bother asking it again."
+        },
+        {
+            "datetime": "2021-09-24 17:13:05.975016",
+            "user": "eXsage#8592",
+            "request": "sz.remove CHE101 CSE330 CSE421 CSE422",
+            "response": "`CSE422` course role has been removed from <@!526665368333189120>"
+        },
+        {
+            "datetime": "2021-09-24 17:13:44.947970",
+            "user": "eXsage#8592",
+            "request": "sz.remove cse420",
+            "response": "`CSE420` course role has been removed from <@!526665368333189120>"
+        },
+        {
+            "datetime": "2021-09-24 17:13:48.857839",
+            "user": "retrysamurai#4029",
+            "request": "sz.add bus101 cse321 cse350 cse360",
+            "response": "`BUS101` course role has been given to <@!356797738416996353>"
+        },
+        {
+            "datetime": "2021-09-24 17:13:50.063712",
+            "user": "retrysamurai#4029",
+            "request": "sz.add bus101 cse321 cse350 cse360",
+            "response": "`CSE321` course role has been given to <@!356797738416996353>"
+        },
+        {
+            "datetime": "2021-09-24 17:13:51.604480",
+            "user": "retrysamurai#4029",
+            "request": "sz.add bus101 cse321 cse350 cse360",
+            "response": "`CSE350` course role has been given to <@!356797738416996353>"
+        },
+        {
+            "datetime": "2021-09-24 17:13:52.645531",
+            "user": "retrysamurai#4029",
+            "request": "sz.add bus101 cse321 cse350 cse360",
+            "response": "`CSE360` course role has been given to <@!356797738416996353>"
+        },
+        {
+            "datetime": "2021-09-24 17:20:13.424589",
+            "user": "eXsage#8592",
+            "request": "sz.add cse422 cse428 cse421",
+            "response": "`CSE422` course role has been given to <@!526665368333189120>"
+        },
+        {
+            "datetime": "2021-09-24 17:20:14.562582",
+            "user": "eXsage#8592",
+            "request": "sz.add cse422 cse428 cse421",
+            "response": "`CSE428` course role has been given to <@!526665368333189120>"
+        },
+        {
+            "datetime": "2021-09-24 17:20:15.104102",
+            "user": "eXsage#8592",
+            "request": "sz.add cse422 cse428 cse421",
+            "response": "`CSE421` course role has been given to <@!526665368333189120>"
+        },
+        {
+            "datetime": "2021-09-24 17:21:12.048832",
+            "user": "eXsage#8592",
+            "request": "sz.add bus101 cse321 cse350 cse360",
+            "response": "`BUS101` course role has been given to <@!526665368333189120>"
+        },
+        {
+            "datetime": "2021-09-24 17:21:13.054038",
+            "user": "eXsage#8592",
+            "request": "sz.add bus101 cse321 cse350 cse360",
+            "response": "`CSE321` course role has been given to <@!526665368333189120>"
+        },
+        {
+            "datetime": "2021-09-24 17:21:13.823161",
+            "user": "eXsage#8592",
+            "request": "sz.add bus101 cse321 cse350 cse360",
+            "response": "`CSE350` course role has been given to <@!526665368333189120>"
+        },
+        {
+            "datetime": "2021-09-24 17:21:16.930814",
+            "user": "eXsage#8592",
+            "request": "sz.add bus101 cse321 cse350 cse360",
+            "response": "`CSE360` course role has been given to <@!526665368333189120>"
+        }
+    ]
+}
