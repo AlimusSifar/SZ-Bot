@@ -123,7 +123,8 @@ async def sort(ctx: commands.Context, cmd: str.lower):
 # Word of the Day
 @bot.command(name="word-of-the-day")
 async def wotd(ctx: commands.Context):
-    await auto_wotd.start(ctx)
+    if ctx.author == ctx.guild.owner:
+        await auto_wotd.start(ctx)
 
 
 # LOOP: 1 DAY
