@@ -38,14 +38,14 @@ async def help(ctx: commands.Context):
         # embed.set_author(name="SZ Bot", icon_url="https://cdn.discordapp.com/avatars/799989827834478602/018456925efab272d09f8149c9ec8649.webp?size=1024")
         embed.add_field(name="Add",
                         value="`sz.add [role] [role]*`",
-                        inline=True)
+                        inline=False)
         embed.add_field(name="Remove",
                         value="`sz.remove [role] [role]*`",
-                        inline=True)
+                        inline=False)
         embed.add_field(name="Sort",
                         value="`sz.sort [roles]/[channels]`",
-                        inline=True)
-        embed.set_footer(text="`*` : Zero or multiple roles can be given")
+                        inline=False)
+        embed.set_footer(text="* : Zero or multiple roles can be given")
         return await ctx.reply(embed=embed)
 
 
