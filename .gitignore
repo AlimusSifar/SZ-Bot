@@ -130,3 +130,6 @@ dmypy.json
 
 # Logs
 log.json
+
+# replit.com files
+.replit

@@ -5,7 +5,7 @@ import components
 import keep_alive
 
 from datetime import datetime
-from discord.ext import commands
+from discord.ext import commands, tasks
 
 print(f'Status#001 - Packages OK', '\n')
 
@@ -118,6 +118,18 @@ async def sort(ctx: commands.Context, cmd: str.lower):
         return await ctx.reply(f"{cmd.title()} are sorted!")
 
     return await ctx.reply(f"Admin permission is required!")
+
+
+# Word of the Day
+@bot.command(name="word-of-the-day")
+async def wotd(ctx: commands.Context):
+    await auto_wotd.start(ctx)
+
+
+# LOOP: 1 DAY
+@tasks.loop(hours=24)
+async def auto_wotd(ctx: commands.Context):
+    await components.word_of_the_day(ctx)
 
 
 if __name__ == '__main__':

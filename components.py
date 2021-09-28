@@ -1,7 +1,10 @@
+import os
 import json
 import discord
 
+from datetime import datetime
 from discord.utils import get
+from urllib import request
 
 
 # WRITING a log file
@@ -106,3 +109,74 @@ async def sort_subjective_category(server: discord.Guild):
 
     for i in range(len(sorted_channels)):
         await sorted_channels[i].edit(position=initial_pos + i)
+
+
+#
+async def word_of_the_day(ctx):
+    URL = "http://api.wordnik.com/v4"
+
+    res = request.urlopen(
+        f"{URL}/words.json/wordOfTheDay?api_key={os.getenv('WordnikAPI')}")
+    res = json.loads(res.read().decode("utf-8"))
+
+    date = datetime.now().strftime("%A, %d %B %Y")
+    word = res["word"]
+    definitions: list = res["definitions"]
+    examples: list = res["examples"]
+    try:
+        note = res["note"]
+    except Exception as e:
+        note = None
+
+    embed = discord.Embed(
+        title="Word of the Day",
+        type="rich",
+        description=f"Date: **{date}**",
+        url="https://www.wordnik.com/word-of-the-day",
+        color=0xCB4154,
+    )
+
+    embed.set_author(
+        name="Wordnik",
+        url="https://www.wordnik.com",
+        icon_url="https://www.wordnik.com/assets/logo-heart.png",
+    )
+
+    embed.add_field(
+        name="Definitions:",
+        value="__ __",
+        inline=False,
+    )
+
+    embed.add_field(
+        name=f"Word",
+        value=f"*{word}*",
+        inline=False,
+    )
+
+    for definition in definitions:
+        embed.add_field(
+            name=f"[{definition['partOfSpeech']}]",
+            value=f"*{definition['text']}*",
+            inline=False,
+        )
+
+    embed.add_field(
+        name="Examples:",
+        value="__ __",
+        inline=False,
+    )
+
+    for example in examples:
+        embed.add_field(
+            name=f"{example['title']}",
+            value=f"*{example['text']}*",
+            inline=False,
+        )
+
+    if note:
+        embed.set_footer(text=f"Note: {note}")
+
+    channel = get(ctx.guild.channels, id=892421101802643486)
+
+    return await channel.send(embed=embed)
