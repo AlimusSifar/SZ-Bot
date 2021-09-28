@@ -36,9 +36,16 @@ async def help(ctx: commands.Context):
                               description="Basic command patterns",
                               color=0x45b865)
         # embed.set_author(name="SZ Bot", icon_url="https://cdn.discordapp.com/avatars/799989827834478602/018456925efab272d09f8149c9ec8649.webp?size=1024")
-        embed.add_field(name="Add", value="sz.add role+", inline=True)
-        embed.add_field(name="Remove", value="sz.remove role+", inline=True)
-        embed.set_footer(text="+ : One or multiple roles can be given")
+        embed.add_field(name="Add",
+                        value="`sz.add [role] [role]*`",
+                        inline=True)
+        embed.add_field(name="Remove",
+                        value="`sz.remove [role] [role]*`",
+                        inline=True)
+        embed.add_field(name="Sort",
+                        value="`sz.sort [roles]/[channels]`",
+                        inline=True)
+        embed.set_footer(text="`*` : Zero or multiple roles can be given")
         return await ctx.reply(embed=embed)
 
 
@@ -97,31 +104,20 @@ async def remove_roles(ctx: commands.Context, *roles: str.upper):
 
 
 #
-@bot.command(name="sort_roles")
-async def sort_roles(ctx: commands.Context):
+@bot.command(name="sort")
+async def sort(ctx: commands.Context, cmd: str.lower):
     if ctx.author == ctx.guild.owner:
         async with ctx.typing():
-            await components.sort_subjective_roles(ctx.guild.roles)
+            if cmd == "roles":
+                await components.sort_subjective_roles(ctx.guild.roles)
+
+            elif cmd == "channels":
+                await components.sort_subjective_category(ctx.guild)
 
         await ctx.message.add_reaction('🆗')
-        return await ctx.reply(f"Roles are sorted!")
+        return await ctx.reply(f"{cmd.title()} are sorted!")
 
-    return await ctx.reply(f"You don't have the permission to use this command"
-                           )
-
-
-#
-@bot.command(name="sort_channels")
-async def sort_channels(ctx: commands.Context):
-    if ctx.author == ctx.guild.owner:
-        async with ctx.typing():
-            await components.sort_subjective_category(ctx.guild)
-
-        await ctx.message.add_reaction('🆗')
-        return await ctx.reply(f"Channels are sorted!")
-
-    return await ctx.reply(f"You don't have the permission to use this command"
-                           )
+    return await ctx.reply(f"Admin permission is required!")
 
 
 if __name__ == '__main__':
