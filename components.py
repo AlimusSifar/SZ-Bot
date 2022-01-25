@@ -12,15 +12,15 @@ def log_to_json(now, user, request: str, response: str) -> None:
     """
     Creates a log file of the User requests and Bot responses.
     """
-    logs = {"log": []}
 
     # CHECKING: if log file exists
     try:
         open("log.json", "r")
-
     except:
         open("log.json", "x")
 
+    logs = {"log": []}
+    
     # READING: log file
     with open("log.json", "r", encoding="utf-8") as jsonfile:
         try:
@@ -112,7 +112,7 @@ async def sort_subjective_category(server: discord.Guild):
 
 
 #
-async def word_of_the_day(ctx):
+async def word_of_the_day(channel: discord.TextChannel):
     URL = "http://api.wordnik.com/v4"
 
     res = request.urlopen(
@@ -143,14 +143,14 @@ async def word_of_the_day(ctx):
     )
 
     embed.add_field(
-        name="Definitions:",
-        value="__ __",
+        name=f"Word",
+        value=f"*{word}*",
         inline=False,
     )
 
     embed.add_field(
-        name=f"Word",
-        value=f"*{word}*",
+        name="Definitions:",
+        value="__ __",
         inline=False,
     )
 
@@ -176,7 +176,5 @@ async def word_of_the_day(ctx):
 
     if note:
         embed.set_footer(text=f"Note: {note}")
-
-    channel = get(ctx.guild.channels, id=892421101802643486)
 
     return await channel.send(embed=embed)

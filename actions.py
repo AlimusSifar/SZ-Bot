@@ -69,7 +69,7 @@ async def add_role(ctx: commands.Context, role_name: str) -> None:
 
 
 #
-async def remove_role(ctx: commands.Context, role_name: str) -> None:
+async def drop_role(ctx: commands.Context, role_name: str) -> None:
     member: discord.Member = ctx.author
     message: discord.Message = ctx.message
 
@@ -78,7 +78,7 @@ async def remove_role(ctx: commands.Context, role_name: str) -> None:
     if role_found_in_user:
         await message.add_reaction('🆗')
         await member.remove_roles(role_found_in_user)
-        response = f'`{role_name}` course role has been removed from {member.mention}'
+        response = f'`{role_name}` course role has been dropped from {member.mention}'
         #
         components.log_to_json(datetime.now(), member,
                                message.content, response)

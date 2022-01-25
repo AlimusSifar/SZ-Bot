@@ -13,8 +13,8 @@ intents = discord.Intents.default()
 intents.members = True
 
 # NOTE: Bot object
-PREFIX = "sz."
-bot = commands.Bot(command_prefix=PREFIX, help_command=None, intents=intents)
+PREFIXES = ("sz.", "Sz.", "sZ.", "SZ.")
+bot = commands.Bot(command_prefix=PREFIXES, help_command=None, intents=intents)
 
 
 #
@@ -23,7 +23,7 @@ async def on_ready():
     # `Listening` activity
     await bot.change_presence(activity=discord.Activity(
         type=discord.ActivityType.listening,
-        name=PREFIX,
+        name=PREFIXES,
     ))
     print(f'Status#002 - {bot.user.name} is listening.', '\n')
 
@@ -39,8 +39,8 @@ async def help(ctx: commands.Context):
         embed.add_field(name="Add",
                         value="`sz.add [role] [role]*`",
                         inline=False)
-        embed.add_field(name="Remove",
-                        value="`sz.remove [role] [role]*`",
+        embed.add_field(name="Drop",
+                        value="`sz.drop [role] [role]*`",
                         inline=False)
         embed.add_field(name="Sort",
                         value="`sz.sort [roles]/[channels]`",
@@ -76,9 +76,9 @@ async def add_roles(ctx: commands.Context, *roles: str.upper):
                 return await ctx.reply(response)
 
 
-# REMOVE COMMAND
-@bot.command(name="remove")
-async def remove_roles(ctx: commands.Context, *roles: str.upper):
+# DROP COMMAND
+@bot.command(name="drop", aliases=["remove"])
+async def drop_roles(ctx: commands.Context, *roles: str.upper):
     message: discord.Message = ctx.message
 
     if len(roles) == 0:
@@ -92,7 +92,7 @@ async def remove_roles(ctx: commands.Context, *roles: str.upper):
     for role in roles:
         async with ctx.typing():
             if components.is_valid(role):
-                await actions.remove_role(ctx, role)
+                await actions.drop_role(ctx, role)
 
             else:
                 await message.add_reaction('😑')
@@ -122,15 +122,25 @@ async def sort(ctx: commands.Context, cmd: str.lower):
 
 # Word of the Day
 @bot.command(name="word-of-the-day")
-async def wotd(ctx: commands.Context):
+async def wotd(ctx: commands.Context, channel: discord.TextChannel):
     if ctx.author == ctx.guild.owner:
-        await auto_wotd.start(ctx)
+        await auto_wotd.start(channel)
 
 
 # LOOP: 1 DAY
-@tasks.loop(hours=24)
-async def auto_wotd(ctx: commands.Context):
-    await components.word_of_the_day(ctx)
+@tasks.loop(minutes=1440)
+async def auto_wotd(channel: discord.TextChannel):
+    
+    await components.word_of_the_day(channel)
+
+
+@auto_wotd.before_loop
+async def before_auto_wotd():
+    print('waiting...')
+    print(f'Running: {auto_wotd.is_running()}')
+    print(f'Cancelled: {auto_wotd.is_being_cancelled()}')
+    print(f'Failed: {auto_wotd.failed()}')
+    await bot.wait_until_ready()
 
 
 if __name__ == '__main__':
