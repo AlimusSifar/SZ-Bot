@@ -31,7 +31,8 @@ class Sorting(Cog, name="Sorting"):
         async with ctx.typing():
             if channels != sorted_channels:
                 for pos in range(len(sorted_channels)):
-                    await sorted_channels[pos].edit(position=initial_pos + pos)
+                    if pos != sorted_channels[pos].position:
+                        await sorted_channels[pos].edit(position=initial_pos + pos)
 
             return await ctx.reply(f"Text channels are sorted!")
 

@@ -137,6 +137,7 @@ log.json
 # replit.com files
 .replit
 .upm
+replit.nix
 
 # vscode settings
 .vscode
