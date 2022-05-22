@@ -8,6 +8,7 @@ authors = ["Alimus SIfar <alimus.sifar@g.bracu.ac.bd>"]
 python = "^3.8"
 nextcord = "^2.0.0-alpha.10"
 Flask = "^2.1.2"
+colorama = "^0.4.4"
 
 [tool.poetry.dev-dependencies]
 
