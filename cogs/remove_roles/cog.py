@@ -29,12 +29,12 @@ class RemoveRoles(Cog, name="Remove Roles"):
         for role_name in role_names:
             async with ctx.typing():
                 if components.role_is_valid(role_name):
-                    return await actions.remove_role(ctx, role_name)
-
-                await message.add_reaction("😑")
-                response = (f"```fix\n❗️ Invalid course name {role_name}```\n"
-                            "> Retry with a valid name. i.e.: CSE###, MAT###, PHY###")
-                return await ctx.reply(response)
+                    await actions.remove_role(ctx, role_name)
+                else:
+                    await message.add_reaction("😑")
+                    response = (f"```fix\n❗️ Invalid course name {role_name}```\n"
+                                "> Retry with a valid name. i.e.: CSE###, MAT###, PHY###")
+                    await ctx.reply(response)
 
 
 def setup(bot: Bot):

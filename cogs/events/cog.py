@@ -3,6 +3,9 @@ from nextcord.ext.commands import Cog, Bot, Context
 
 from utils import logging
 
+from colorama import init, Fore
+init(autoreset=True)
+
 
 class Events(Cog):
     """Bot event handler"""
@@ -14,13 +17,13 @@ class Events(Cog):
     async def on_ready(self):
         """Called when the client is done preparing the data received from Discord"""
         logging.info(f"'{self.bot.user}' is listening.")
-        print(f">>> {self.bot.user} is listening <<<", "\n")
+        print(f"{Fore.GREEN}>>> {self.bot.user} is listening <<<", "\n")
 
     @Cog.listener()
     async def on_member_join(self, member: Member):
         """Triggered when a member joins a guild"""
         logging.info(f"{member} just spawned in this server.")
-        print(f">>> {member} just spawned in this server <<<")
+        print(f"{Fore.MAGENTA}>> {member} just spawned in this server <<<")
 
     @Cog.listener()
     async def on_command_error(self, ctx: Context, error: Exception):

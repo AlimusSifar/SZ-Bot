@@ -4,8 +4,10 @@ from nextcord import Intents, Activity, ActivityType
 from nextcord.ext.commands import Bot
 
 from utils.keep_alive import keep_alive
+from colorama import init, Fore
+init(autoreset=True)
 
-print(f">>> Successfully imported modules <<<")
+print(f"{Fore.GREEN}>>> Successfully imported modules <<<")
 
 
 def main():

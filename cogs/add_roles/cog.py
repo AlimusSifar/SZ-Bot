@@ -29,12 +29,12 @@ class AddRoles(Cog, name="Add Roles"):
         for role_name in role_names:
             async with ctx.typing():
                 if components.role_is_valid(role_name):
-                    return await actions.add_role(ctx, role_name)
-
-                await message.add_reaction("😑")
-                response = "```fix\n❗️ Invalid course name {role}``` \
-                    \n> Retry with a valid name. i.e.: CSE###, MAT###, PHY###"
-                return await ctx.reply(response)
+                    await actions.add_role(ctx, role_name)
+                else:
+                    await message.add_reaction("😑")
+                    response = "```fix\n❗️ Invalid course name {role}``` \
+                        \n> Retry with a valid name. i.e.: CSE###, MAT###, PHY###"
+                    await ctx.reply(response)
 
 
 def setup(bot: Bot):
