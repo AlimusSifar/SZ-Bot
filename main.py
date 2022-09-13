@@ -1,34 +1,61 @@
-from os import path, listdir, getenv
+from ast import literal_eval
+import asyncio
+from os import getenv
 
-from nextcord import Intents, Activity, ActivityType
-from nextcord.ext.commands import Bot
-
-from utils.keep_alive import keep_alive
 from colorama import init, Fore
+from discord import (
+    Activity,
+    ActivityType,
+    Intents,
+)
+from discord.ext.commands import Bot
+import dotenv
+
+from cogs.utils.keep_alive import keep_alive
+
+dotenv.load_dotenv()
 init(autoreset=True)
 
-print(f"{Fore.GREEN}>>> Successfully imported modules <<<")
+
+PREFIXES = literal_eval(getenv("PREFIXES"))
 
 
-def main():
-    intents = Intents.default()
-    intents.members = True
+class Bot_(Bot):
+    extensions = [
+        "cogs.Admin.sync",
+        "cogs.Admin.sort",
+        "cogs.Events.cog",
+        "cogs.User.add_roles",
+        "cogs.User.dictionary",
+        "cogs.User.games",
+        # "cogs.User.morsecode",
+        # "cogs.User.ping",
+        "cogs.User.quotes",
+        "cogs.User.remove_roles",
+    ]
 
-    command_prefix = ["sz.", "sZ.", "Sz.", "SZ."]
-    # `Listening` activity
-    activity = Activity(
-        type=ActivityType.listening,
-        name=f"`{command_prefix[0]}` command",
-    )
-    bot = Bot(command_prefix, intents=intents, activity=activity)
+    def __init__(self):
+        super().__init__(
+            command_prefix=PREFIXES,
+            intents=Intents.all(),
+            activity=Activity(
+                name=f"prefix `{PREFIXES[0]}`",
+                type=ActivityType.listening,
+            ),
+        )
 
-    for folder in listdir("cogs"):
-        if path.exists(path.join("cogs", folder, "cog.py")):
-            bot.load_extension(f"cogs.{folder}.cog")
+    async def setup_hook(self) -> None:
+        for ext in self.extensions:
+            await self.load_extension(ext)
+            print(f"* {Fore.GREEN}Loaded `{ext}` extension.")
 
-    bot.run(getenv("discord-bot-token"))
+
+async def main():
+    bot = Bot_()
+    async with bot:
+        await bot.start(getenv("sz-bot-token"))
 
 
 if __name__ == "__main__":
     keep_alive()
-    main()
+    asyncio.run(main())

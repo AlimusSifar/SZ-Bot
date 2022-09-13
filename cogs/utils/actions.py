@@ -1,14 +1,14 @@
-from nextcord import (
+from discord import (
     Message,
     Member,
     Guild,
     PermissionOverwrite,
     Role,
 )
-from nextcord.ext.commands import (
+from discord.ext.commands import (
     Context,
 )
-from nextcord.utils import get
+from discord.utils import get
 
 
 async def create_text_channel(server: Guild, role: Role):
@@ -39,8 +39,8 @@ async def add_role(ctx: Context, role_name: str):
 
     if get(member.roles, name=role_name):
         await message.add_reaction("😤")
-        response = f"You already have `{role_name}` course role. \
-            \nDon't bother asking again."
+        response = (f"You already have `{role_name}` course role.\n"
+                    "Don't bother asking again.")
         # LOGGING
         # components.log_to_json(datetime.now(), member, message.content, response)
         return await ctx.reply(response)
@@ -73,8 +73,8 @@ async def remove_role(ctx: Context, role_name: str):
 
     if not role_found_in_member:
         await message.add_reaction("😤")
-        response = f"You don't have `{role_name}` course role. \
-            \nDon't bother asking it again."
+        response = (f"You don't have `{role_name}` course role.\n"
+                    "Don't bother asking again.")
         return await ctx.reply(response)
 
     await message.add_reaction("🆗")

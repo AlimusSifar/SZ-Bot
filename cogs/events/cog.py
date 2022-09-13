@@ -1,7 +1,7 @@
-from nextcord import Member
-from nextcord.ext.commands import Cog, Bot, Context
+import logging
 
-from utils import logging
+from discord import Member
+from discord.ext.commands import Cog, Bot, Context
 
 from colorama import init, Fore
 init(autoreset=True)
@@ -17,13 +17,13 @@ class Events(Cog):
     async def on_ready(self):
         """Called when the client is done preparing the data received from Discord"""
         logging.info(f"'{self.bot.user}' is listening.")
-        print(f"{Fore.GREEN}>>> {self.bot.user} is listening <<<", "\n")
+        print(f"* {Fore.GREEN}{self.bot.user} is listening")
 
     @Cog.listener()
     async def on_member_join(self, member: Member):
         """Triggered when a member joins a guild"""
         logging.info(f"{member} just spawned in this server.")
-        print(f"{Fore.MAGENTA}>> {member} just spawned in this server <<<")
+        print(f"* {Fore.MAGENTA}>> {member} just spawned in this server.")
 
     @Cog.listener()
     async def on_command_error(self, ctx: Context, error: Exception):
@@ -31,5 +31,13 @@ class Events(Cog):
         logging.error(f"User '{ctx.author}' invoked '{ctx.message.content}' command resulting to: [E] {error}.")
 
 
-def setup(bot: Bot):
-    bot.add_cog(Events(bot))
+async def setup(bot: Bot) -> None:
+    """
+    Loads the cog
+
+    Parameters
+    ----------
+    bot : Bot
+        The bot instance
+    """
+    await bot.add_cog(Events(bot))

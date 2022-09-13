@@ -132,12 +132,20 @@ dmypy.json
 .pyre/
 
 # Logs
+log/
+logs/
 log.json
 
 # replit.com files
+.cache/
+.config/
+replit.nix
 .replit
 .upm
-replit.nix
+venv/
 
 # vscode settings
 .vscode
+
+# others
+cleanup.py

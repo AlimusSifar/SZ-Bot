@@ -1,4 +1,5 @@
 from os import path, mkdir
+from datetime import date
 import logging
 
 
@@ -15,10 +16,10 @@ def mkdir_if_not_exists(pathname):
 
 configs = Config()
 configs.level = logging.INFO
-configs.filename = 'log/logs.log'
+configs.filename = f'logs/{date.today()}.log'
 # configs.encoding = 'utf-8'
 configs.filemode = 'w'
 configs.format = ('[%(levelname)s] at [%(asctime)s] from [%(name)s] inside [%(funcName)s] function '
                   'on [line %(lineno)s]:\n%(message)s')
-mkdir_if_not_exists('log')
+mkdir_if_not_exists('logs')
 logging.basicConfig(**configs)
