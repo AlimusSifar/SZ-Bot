@@ -20,11 +20,11 @@ class Quotes(Cog):
         name="quote", description="Returns a quote from a given type."
     )
     @app_commands.describe(type="Type of quote to return.")
-    # @app_commands.choices(
-    #     type=[
-    #         app_commands.Choice(name="random", value="random"),
-    #     ]
-    # )
+    @app_commands.choices(
+        type=[
+            app_commands.Choice(name="random", value="random"),
+        ]
+    )
     async def quote(self, interaction: Interaction, type: str = "random") -> None:
         """
         Returns a quote from a given type. If no type is given, a random quote is returned.

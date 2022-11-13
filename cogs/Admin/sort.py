@@ -1,4 +1,4 @@
-from discord import app_commands, Interaction, Role
+from discord import app_commands, Interaction
 from discord.ext.commands import (
     Bot,
     Cog,
@@ -32,7 +32,6 @@ class Sorting(Cog):
         type : str
             The type of sorting to perform.
         """
-
         await interaction.response.defer(ephemeral=True)
         if type == "channels":
             await sort_channels(interaction)
@@ -62,10 +61,9 @@ async def sort_roles(interaction: Interaction) -> None:
     """
     Sorts all the BRACU course roles in the server.
     """
-    await interaction.response.defer(ephemeral=True)
     roles = interaction.guild.roles
     # reference to SZ-Bot role
-    ref_role: Role = get(roles, id=806463759027142667)
+    ref_role = get(roles, id=806463759027142667)
 
     old_roles = [roles[pos] for pos in range(1, ref_role.position)]
     new_roles = sorted(old_roles, reverse=True, key=lambda roles: roles.name)

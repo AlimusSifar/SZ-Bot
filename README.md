@@ -1,18 +1,17 @@
 # **SZ-Bot**
 
-Study Zone BOT. Private Bot of Discord's Study Zone Server.
+Study Zone BOT. A Private Bot of Discord's Study Zone Server.
 
-
-### Commands
+## Commands
 
 > **Help : `sz.help`**
-> 
+>
 > **Add : `sz.add [role] [role]*`**
-> 
+>
 > **Remove : `sz.remove [role] [role]*`**
-> 
+>
 > **Sort [admin]: `sz.sort [roles]/[channels]`**
 
+## Notes
 
-### Notes:
 > `*` : Zero or more.

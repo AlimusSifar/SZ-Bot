@@ -16,12 +16,14 @@ from cogs.utils.keep_alive import keep_alive
 dotenv.load_dotenv()
 init(autoreset=True)
 
-
-PREFIXES = literal_eval(getenv("PREFIXES"))
+if getenv("PREFIXES") is None:
+    raise ValueError("No prefixes provided")
+else:
+    PREFIXES = literal_eval(str(getenv("PREFIXES")))
 
 
 class Bot_(Bot):
-    extensions = [
+    extensions: list[str] = [
         "cogs.Admin.sync",
         "cogs.Admin.sort",
         "cogs.Events.cog",
@@ -53,7 +55,10 @@ class Bot_(Bot):
 async def main():
     bot = Bot_()
     async with bot:
-        await bot.start(getenv("sz-bot-token"))
+        if getenv("sz-bot-token") is None:
+            raise ValueError("No token provided")
+        else:
+            await bot.start(str(getenv("sz-bot-token")))
 
 
 if __name__ == "__main__":
